@@ -95,7 +95,7 @@ class BrowserCommander(BaseCommander):
         return self._selenium_helper
 
     def input(self, element, text, send_enter_key=False):
-        self.record_msg("input")
+        self.record_msg("input %s, %s, %s" % (element.name, text, send_enter_key))
         e = self._selenium_helper.wait_and_move_to(element)
         self._selenium_helper.click_chain.perform()
         if send_enter_key:
@@ -104,11 +104,12 @@ class BrowserCommander(BaseCommander):
             e.send_keys(text)
 
     def click(self, element):
-        self.record_msg("click")
+        self.record_msg("click %s" % element.name)
         self._selenium_helper.wait_and_move_to(element)
         self._selenium_helper.click_chain.perform()
 
     def double_click(self, element):
+        self.record_msg("click %s" % element.name)
         self._selenium_helper.wait_and_move_to(element)
         self._selenium_helper.double_click_chain.perform()
 

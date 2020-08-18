@@ -3,8 +3,8 @@
 # @Author      : Pan
 # @Description : 
 import abc
-import logging
 import sys
+import time
 
 
 class AbstractCommanderInfoObserver(object):
@@ -34,7 +34,9 @@ class CommanderInfo(object):
         for o in self.__observers:
             o.notify(msg)
 
-    def add_msg(self, msg):
+    def add_msg(self, msg, with_datetime=True):
+        if with_datetime:
+            msg = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '' + msg
         self.__msgs.append(msg)
         self.notify(msg)
 
